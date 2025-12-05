@@ -39,7 +39,7 @@ header {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   gap: 12px;
 }
 
@@ -141,17 +141,68 @@ header {
 }
 
 /* Layout */
-main {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-auto-rows: minmax(260px, auto);
-  gap: 16px;
+.upload-card {
+  margin-bottom: 16px;
 }
 
-@media (max-width: 960px) {
-  main {
-    grid-template-columns: 1fr;
-  }
+.upload-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+  gap: 6px;
+}
+
+.upload-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.upload-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.upload-label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-width: 420px;
+}
+
+.upload-label-main {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.upload-label-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+#csv-input {
+  font-size: 12px;
+}
+
+.clear-btn {
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--danger);
+  background: #fff5f5;
+  color: var(--danger);
+  padding: 6px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.clear-btn:hover {
+  background: #fee2e2;
+}
+
+.upload-status {
+  font-size: 11px;
 }
 
 /* Cards */
@@ -164,6 +215,19 @@ main {
   display: flex;
   flex-direction: column;
   min-height: 0;
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: minmax(260px, auto);
+  gap: 16px;
+}
+
+@media (max-width: 960px) {
+  main {
+    grid-template-columns: 1fr;
+  }
 }
 
 .card-header {

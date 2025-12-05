@@ -38,6 +38,34 @@
       </div>
     </header>
 
+    <!-- CSV upload / data control bar -->
+    <section class="card upload-card">
+      <div class="upload-header">
+        <div>
+          <div class="card-title">
+            Data Source
+            <span class="pill-tag green">CSV Testing Mode</span>
+          </div>
+          <div class="card-subtitle">
+            Upload MSS reservation exports (past + current). Files are merged and saved in this browser so you don’t need to re-upload history.
+          </div>
+        </div>
+      </div>
+      <div class="upload-body">
+        <div class="upload-controls">
+          <label class="upload-label">
+            <span class="upload-label-main">Upload CSV export</span>
+            <span class="upload-label-sub">Headers expected: Name, Area Reserved, Reservation Date, Start Time, End Time, Title, Sport, Paid Status, Price, Form Of Payment</span>
+          </label>
+          <input type="file" id="csv-input" accept=".csv" />
+          <button id="clear-data-btn" class="clear-btn" type="button">Clear saved data</button>
+        </div>
+        <div class="upload-status">
+          <span id="upload-status-text" class="muted">No data loaded yet. Upload one or more CSVs to populate the dashboard.</span>
+        </div>
+      </div>
+    </section>
+
     <main>
       <!-- Q1: Rentals & Revenue -->
       <section class="card" id="q1-card">
@@ -57,9 +85,9 @@
             <div class="kpi">
               <div class="kpi-label">Total Rentals</div>
               <div class="kpi-value">
-                <span id="total-rentals">7</span>
+                <span id="total-rentals">0</span>
                 <span class="kpi-trend" id="rentals-trend">
-                  <span class="arrow">▲</span> +2 vs prior
+                  <span class="arrow">●</span> Waiting for data
                 </span>
               </div>
               <div class="kpi-caption">Includes all sports &amp; courts</div>
@@ -67,9 +95,9 @@
             <div class="kpi">
               <div class="kpi-label">Total Revenue (non-failed)</div>
               <div class="kpi-value">
-                <span id="total-revenue">$676.75</span>
+                <span id="total-revenue">$0.00</span>
                 <span class="kpi-trend" id="revenue-trend">
-                  <span class="arrow">▲</span> +15% vs prior
+                  <span class="arrow">●</span> Waiting for data
                 </span>
               </div>
               <div class="kpi-caption">
@@ -82,7 +110,7 @@
             <div class="table">
               <div class="table-header">
                 <span>By Hour</span>
-                <span class="muted" id="hourly-label">Today</span>
+                <span class="muted" id="hourly-label">Selected Range</span>
               </div>
               <div class="table-body">
                 <table>
@@ -94,7 +122,9 @@
                     </tr>
                   </thead>
                   <tbody id="hourly-table-body">
-                    <!-- populated by JS -->
+                    <tr>
+                      <td colspan="3" class="muted">Upload CSV data to see hourly rentals.</td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -115,7 +145,9 @@
                     </tr>
                   </thead>
                   <tbody id="payment-table-body">
-                    <!-- populated by JS -->
+                    <tr>
+                      <td colspan="3" class="muted">Upload CSV data to see payment mix.</td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -123,8 +155,7 @@
           </div>
 
           <div class="small-note">
-            Note: values shown here are sample placeholders; your developer will connect this
-            to live MSS data.
+            Note: data here is calculated from uploaded MSS reservation exports and stored in your browser only.
           </div>
         </div>
       </section>
@@ -138,7 +169,7 @@
               <span class="pill-tag">Analytics</span>
             </div>
             <div class="card-subtitle">
-              Current period vs prior, plus YTD vs last YTD (based on available data).
+              Current period vs prior, plus YTD vs last YTD (based on uploaded data).
             </div>
           </div>
         </div>
@@ -147,9 +178,9 @@
             <div class="kpi">
               <div class="kpi-label">Current Period Rentals</div>
               <div class="kpi-value">
-                <span id="current-rentals">218</span>
+                <span id="current-rentals">0</span>
                 <span class="kpi-trend" id="current-rentals-trend">
-                  <span class="arrow">▲</span> +218 vs prior
+                  <span class="arrow">●</span> Waiting for data
                 </span>
               </div>
               <div class="kpi-caption">
@@ -159,9 +190,9 @@
             <div class="kpi">
               <div class="kpi-label">Current Period Revenue</div>
               <div class="kpi-value">
-                <span id="current-revenue">$23,383.90</span>
+                <span id="current-revenue">$0.00</span>
                 <span class="kpi-trend" id="current-revenue-trend">
-                  <span class="arrow">▲</span> +$23,383.90 vs prior
+                  <span class="arrow">●</span> Waiting for data
                 </span>
               </div>
               <div class="kpi-caption">
@@ -187,7 +218,9 @@
                     </tr>
                   </thead>
                   <tbody id="period-compare-body">
-                    <!-- JS will populate -->
+                    <tr>
+                      <td colspan="4" class="muted">Upload data to see period comparisons.</td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -196,7 +229,7 @@
             <div class="table">
               <div class="table-header">
                 <span>YTD vs Last YTD</span>
-                <span class="muted">Based on available data</span>
+                <span class="muted">Based on uploaded data</span>
               </div>
               <div class="table-body">
                 <table>
@@ -209,7 +242,9 @@
                     </tr>
                   </thead>
                   <tbody id="ytd-compare-body">
-                    <!-- JS will populate -->
+                    <tr>
+                      <td colspan="4" class="muted">Upload data to see YTD vs last YTD.</td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -242,7 +277,7 @@
               <div class="kpi-value">
                 <span id="failed-range-count">0</span>
                 <span class="kpi-trend neg" id="failed-range-caption">
-                  <span class="arrow">●</span> No new failures
+                  <span class="arrow">●</span> Waiting for data
                 </span>
               </div>
               <div class="kpi-caption">
@@ -252,9 +287,9 @@
             <div class="kpi">
               <div class="kpi-label">Outstanding Failed (All Time)</div>
               <div class="kpi-value">
-                <span id="failed-outstanding-amount">$180.94</span>
+                <span id="failed-outstanding-amount">$0.00</span>
                 <span class="kpi-trend neg" id="failed-outstanding-caption">
-                  <span class="arrow">▲</span> 4 open items
+                  <span class="arrow">●</span> Waiting for data
                 </span>
               </div>
               <div class="kpi-caption">
@@ -281,7 +316,9 @@
                     </tr>
                   </thead>
                   <tbody id="failed-range-body">
-                    <!-- JS will populate -->
+                    <tr>
+                      <td colspan="5" class="muted">Upload data to see failed payments for this range.</td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -304,7 +341,9 @@
                     </tr>
                   </thead>
                   <tbody id="failed-outstanding-body">
-                    <!-- JS will populate -->
+                    <tr>
+                      <td colspan="5" class="muted">Upload data to see all outstanding failed payments.</td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -335,9 +374,9 @@
             <div class="kpi">
               <div class="kpi-label">Total Sports/Programs</div>
               <div class="kpi-value">
-                <span id="sports-count">3</span>
+                <span id="sports-count">0</span>
                 <span class="kpi-trend">
-                  <span class="arrow">●</span> Basketball, Training, Volleyball
+                  <span class="arrow">●</span> Waiting for data
                 </span>
               </div>
               <div class="kpi-caption">
@@ -347,9 +386,9 @@
             <div class="kpi">
               <div class="kpi-label">Setup-Required Rentals</div>
               <div class="kpi-value">
-                <span id="setup-count">1</span>
+                <span id="setup-count">0</span>
                 <span class="kpi-trend">
-                  <span class="arrow">▲</span> Volleyball &amp; Parties only
+                  <span class="arrow">●</span> Waiting for data
                 </span>
               </div>
               <div class="kpi-caption">
@@ -374,7 +413,9 @@
                     </tr>
                   </thead>
                   <tbody id="sport-body">
-                    <!-- JS will populate -->
+                    <tr>
+                      <td colspan="3" class="muted">Upload data to see rentals by sport.</td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -395,7 +436,9 @@
                     </tr>
                   </thead>
                   <tbody id="setup-body">
-                    <!-- JS will populate -->
+                    <tr>
+                      <td colspan="3" class="muted">Upload data to see setup-required rentals.</td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
