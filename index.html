@@ -1,1 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Hive Annex Dashboard</title>
+    <link rel="stylesheet" href="style-v2.css" />
+</head>
+<body>
+
+    <!-- TITLE + SUBTITLE -->
+    <h1 class="main-title">The Hive Annex</h1>
+    <h2 class="sub-title">Daily Facility Dashboard</h2>
+
+    <!-- TIMESTAMP BAR -->
+    <div class="timestamp-bar">
+        <span id="data-date">Data Date: —</span>
+        &nbsp; • &nbsp;
+        <span id="last-upload">Last Upload: —</span>
+    </div>
+
+    <!-- CSV UPLOAD + CLEAR AREA -->
+    <div style="margin: 20px;">
+        <input type="file" id="csv-input" accept=".csv" />
+        <button id="clear-data-btn">Clear Stored Data</button>
+        <p id="status"></p>
+    </div>
+
+    <!-- DASHBOARD CONTAINER -->
+    <div id="dashboard-container">
+
+        <!-- TODAY'S SNAPSHOT -->
+        <section id="today-section">
+            <h2>Today's Rentals</h2>
+            <canvas id="today-chart"></canvas>
+            <div id="today-stats"></div>
+        </section>
+
+        <!-- MONTH VS LAST MONTH + YTD -->
+        <section id="trend-section">
+            <h2>Monthly & YTD Comparison</h2>
+            <canvas id="trend-chart"></canvas>
+            <div id="trend-stats"></div>
+        </section>
+
+        <!-- FAILED PAYMENTS -->
+        <section id="failed-section">
+            <h2>Failed Payments</h2>
+            <h3>Failed Today</h3>
+            <div id="failed-today"></div>
+
+            <h3>Outstanding Failed Payments</h3>
+            <div id="failed-outstanding"></div>
+        </section>
+
+        <!-- SPORT MIX + SETUP REQUIRED -->
+        <section id="sports-section">
+            <h2>Sport Breakdown</h2>
+            <canvas id="sports-chart"></canvas>
+            <div id="sports-stats"></div>
+
+            <h3>Setup Required (VB + Parties)</h3>
+            <div id="setup-required"></div>
+        </section>
+
+    </div>
+
+    <!-- DASHBOARD LOGIC -->
+    <script src="app.js"></script>
+
+</body>
+</html>
 
