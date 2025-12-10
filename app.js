@@ -10,6 +10,25 @@
 // Title, Sport, Paid Status, Price, Form Of Payment
 
 const STORAGE_KEY = "mssDashboardReservations_v1";
+function updateFacilityHeaderDatesOnLoad() {
+  if (typeof getReferenceToday !== "function") return;
+  const ref = getReferenceToday();
+  const el = document.getElementById("data-date");
+  if (el && ref) {
+    el.textContent = "Data Date: " + ref.toISOString().slice(0, 10);
+  }
+}
+
+function updateLastUploadNow() {
+  const el = document.getElementById("last-upload");
+  if (!el) return;
+  const now = new Date();
+  el.textContent = "Last Upload: " + now.toLocaleTimeString([], {
+    hour: "numeric",
+    minute: "2-digit",
+  });
+}
+
 let reservations = []; // in-memory history
 let currentRangeKey = "today";
 let customRange = { start: null, end: null };
@@ -763,6 +782,7 @@ function resetAllTablesToEmpty() {
 
 document.addEventListener("DOMContentLoaded", () => {
   loadReservationsFromStorage();
+  updateFacilityHeaderDatesOnLoad();
 
   const statusEl = document.getElementById("upload-status-text");
   if (reservations.length) {
@@ -829,7 +849,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         reservations = reservations.concat(rows);
         saveReservationsToStorage();
+        updateLastUploadNow();
         const ref = getReferenceToday();
+        updateFacilityHeaderDatesOnLoad();
         statusEl.textContent =
           "Loaded " +
           rows.length +

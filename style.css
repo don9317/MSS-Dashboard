@@ -423,3 +423,29 @@ tr:last-child td {
   color: var(--text-muted);
   margin-top: 4px;
 }
+
+/* Facility-level header + timestamp bar (Option B) */
+.facility-header {
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.facility-header h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.facility-header h2 {
+  margin: 2px 0 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.timestamp-bar {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
