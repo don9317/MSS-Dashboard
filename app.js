@@ -281,15 +281,9 @@ function loadReservationsFromStorage() {
 // ---------- Date Range Helpers ----------
 
 function getReferenceToday() {
-  if (reservations.length === 0) return null;
-  let maxDate = null;
-  reservations.forEach((r) => {
-    if (!r.reservationDate) return;
-    const d = toDateOnly(r.reservationDate);
-    if (!maxDate || d > maxDate) maxDate = d;
-  });
-  return maxDate;
+  return toDateOnly(new Date()); // always real calendar today
 }
+
 
 function addDays(dateObj, days) {
   const d = new Date(dateObj);
